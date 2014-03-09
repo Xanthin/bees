@@ -4,12 +4,22 @@ Smoker
 Grafting Tool
 
 ]]
+
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+  dofile(minetest.get_modpath("intllib").."/intllib.lua")
+  S = intllib.Getter(minetest.get_current_modname())
+else
+  S = function ( s ) return s end
+end
+
 local sound = {}
 local particles = {}
 
 --nodes
 minetest.register_node("bees:bees", {
-  description = "Wild Bees",
+  description = S("Wild Bees"),
   drawtype = "plantlike",
   paramtype = "light",
   tiles = {
@@ -35,7 +45,7 @@ minetest.register_node("bees:bees", {
 })
 
 minetest.register_node("bees:hive", {
-  description = "Wild Bee Hive",
+  description = S("Wild Bee Hive"),
   tile_images = {"bees_hive_wild.png","bees_hive_wild.png","bees_hive_wild.png", "bees_hive_wild.png", "bees_hive_wild_bottom.png"}, --Neuromancer's base texture
   drawtype = "nodebox",
   paramtype = "light",
@@ -79,7 +89,7 @@ minetest.register_node("bees:hive", {
 })
 
 minetest.register_node("bees:hive_artificial", {
-  description = "Bee Hive",
+  description = S("Bee Hive"),
   tiles = {"default_wood.png","default_wood.png","default_wood.png", "default_wood.png","default_wood.png","bees_hive_artificial.png"},
   drawtype = "nodebox",
   paramtype = "light",
@@ -289,19 +299,19 @@ minetest.register_abm({ --remove bees
 
 --items
 minetest.register_craftitem("bees:honey_comb", {
-  description = "Honey Comb",
+  description = S("Honey Comb"),
   inventory_image = "bees_comb.png",
   on_use = minetest.item_eat(3),
 })
 
 minetest.register_craftitem("bees:honey_bottle", {
-  description = "Honey Bottle",
+  description = S("Honey Bottle"),
   inventory_image = "bees_honey_bottle.png",
   on_use = minetest.item_eat(6),
 })
 
 minetest.register_craftitem("bees:queen", {
-  description = "Queen Bee",
+  description = S("Queen Bee"),
   inventory_image = "bees_particle_bee.png",
   on_use = function(itemstack, user, pointed_thing)
     if pointed_thing.under == nil then return end
@@ -336,7 +346,7 @@ minetest.register_craft({
 })
 
 minetest.register_tool("bees:grafting_tool", {
-	description = "Grafting Tool",
+	description = S("Grafting Tool"),
 	inventory_image = "bees_grafting_tool.png",
 	tool_capabilities = {
 		full_punch_interval = 3.0,
