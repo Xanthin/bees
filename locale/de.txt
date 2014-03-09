@@ -1,9 +1,9 @@
 # Translation by Xanthin
 
-Wild Bees = wilde Bienen
-Wild Bee Hive = wilder Bienenstock
+Wild Bees = Wilde Bienen
+Wild Bee Hive = Wilder Bienenstock
 Bee Hive = Bienenstock
 Honey Comb = Bienenwabe
 Honey Bottle = Honigflasche
 Queen Bee = Bienenkoenigin
-Grafting Tool = Veredelungswerzeug
+Grafting Tool = Veredelungswekzeug
