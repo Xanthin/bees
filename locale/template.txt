@@ -1,1 +1,9 @@
 # Template
+
+Wild Bees =
+Wild Bee Hive =
+Bee Hive = 
+Honey Comb =
+Honey Bottle =
+Queen Bee =
+Grafting Tool =
