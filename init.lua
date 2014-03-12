@@ -117,7 +117,7 @@ minetest.register_node("bees:hive_artificial", {
 })
 
 minetest.register_node("bees:hive_artificial_inhabited", {
-  description = "Bee Hive",
+  description = S("Bee Hive Inhabited"),
   tiles = {"default_wood.png","default_wood.png","default_wood.png", "default_wood.png","default_wood.png","bees_hive_artificial.png"},
   drawtype = "nodebox",
   node_box = {
