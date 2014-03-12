@@ -3,6 +3,7 @@
 Wild Bees =
 Wild Bee Hive =
 Bee Hive = 
+Bee Hive Inhabited = 
 Honey Comb =
 Honey Bottle =
 Queen Bee =
