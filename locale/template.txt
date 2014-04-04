@@ -2,9 +2,12 @@
 
 Wild Bees =
 Wild Bee Hive =
-Bee Hive = 
-Bee Hive Inhabited = 
+Bee Hive =
+Bee Hive Inhabited =
 Honey Comb =
 Honey Bottle =
 Queen Bee =
 Grafting Tool =
+
+Requires the Queen bee =
+100% - Time to harvest =
