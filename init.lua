@@ -7,11 +7,10 @@ Grafting Tool
 
 -- Boilerplate to support localized strings if intllib mod is installed.
 local S
-if (minetest.get_modpath("intllib")) then
-  dofile(minetest.get_modpath("intllib").."/intllib.lua")
-  S = intllib.Getter(minetest.get_current_modname())
+if intllib then
+	S = intllib.Getter()
 else
-  S = function ( s ) return s end
+	S = function(s) return s end
 end
 
 local sound = {}
@@ -112,7 +111,7 @@ minetest.register_node("bees:hive_artificial", {
     tmr:start(10)
     local meta = minetest.get_meta(pos)
     meta:set_string('inhabited','false')
-    meta:set_string('infotext','Requires the Queen bee');
+    meta:set_string('infotext',S('Requires the Queen bee'));
   end,
 })
 
@@ -156,7 +155,7 @@ minetest.register_node("bees:hive_artificial_inhabited", {
       local tmr = minetest.get_node_timer(pos)
       tmr:start(60)
     else
-      meta:set_string('infotext',"100% - Time to harvest");
+      meta:set_string('infotext',S("100% - Time to harvest"));
       meta:set_int("honey", 100)
     end
   end,
