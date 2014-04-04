@@ -7,4 +7,7 @@ Bee Hive Inhabited = Bewohnter Bienenstock
 Honey Comb = Bienenwabe
 Honey Bottle = Honigflasche
 Queen Bee = Bienenkoenigin
-Grafting Tool = Veredelungswekzeug
+Grafting Tool = Kopulierhippe
+
+Requires the Queen bee = Du brauchst eine Bienenkoenigin.
+100% - Time to harvest = 100% - Es ist Zeit zu ernten.
