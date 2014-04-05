@@ -8,9 +8,9 @@ Grafting Tool
 -- Boilerplate to support localized strings if intllib mod is installed.
 local S
 if intllib then
-	S = intllib.Getter()
+  S = intllib.Getter()
 else
-	S = function(s) return s end
+  S = function(s) return s end
 end
 
 local sound = {}
@@ -71,6 +71,12 @@ minetest.register_node("bees:hive", {
   on_construct = function(pos)
     spawn_bees(pos)
     minetest.get_node(pos).param2 = 0
+  end,
+  on_destruct = function(pos)
+    if sound["x"..pos.x.."y"..pos.y.."z"..pos.z] ~= nil then
+      minetest.sound_stop(sound["x"..pos.x.."y"..pos.y.."z"..pos.z])
+      sound["x"..pos.x.."y"..pos.y.."z"..pos.z] = nil
+    end
   end,
   on_punch = function(pos, node, puncher)
     local health = puncher:get_hp()
@@ -187,6 +193,12 @@ minetest.register_node("bees:hive_artificial_inhabited", {
       tmr:start(60)
     end
   end,
+  on_destruct = function(pos)
+    if sound["x"..pos.x.."y"..pos.y.."z"..pos.z] ~= nil then
+      minetest.sound_stop(sound["x"..pos.x.."y"..pos.y.."z"..pos.z])
+      sound["x"..pos.x.."y"..pos.y.."z"..pos.z] = nil
+    end
+  end,
   after_dig_node = function(pos, oldnode, oldmetadata, user)
     local wielded if user:get_wielded_item() ~= nil then wielded = user:get_wielded_item() else return end
     if 'bees:grafting_tool' == wielded:get_name() then 
@@ -261,11 +273,22 @@ function remove_bees(pos)
   ]]
 end
 
-minetest.register_abm({ --spawn abm
+minetest.register_abm({ --for sounds
+  nodenames = {"bees:hive", "bees:bees", "bees:hive_artificial_inhabited"},
+  interval = 2,
+  chance = 6,
+  action = function(pos, node, _, _)
+    sound["x"..pos.x.."y"..pos.y.."z"..pos.z] = minetest.sound_play({name="bees"},{pos=pos, max_hear_distance=8, gain=0.8})
+    local p = {x=pos.x, y=pos.y+math.random()-0.5, z=pos.z}
+    
+  end,
+})
+
+minetest.register_abm({ --spawn abm interval default: interval = 1800, chance = 500
   nodenames = {"group:leafdecay"},
   neighbors = {"default:apple"},
-  interval = 1800,
-  chance = 500,
+  interval = 900,
+  chance = 250,
   action = function(pos, node, _, _)
     local p = {x=pos.x, y=pos.y-1, z=pos.z}
     if minetest.get_node(p).walkable == false then return end
@@ -287,9 +310,21 @@ minetest.register_abm({ --spawning bees around bee hive
   end,
 })
 
+minetest.register_abm({ --spawning bees around artificial bee hive
+  nodenames = {"bees:hive_artificial_inhabited"},
+  interval = 10,
+  chance = 2,
+  action = function(pos, node, _, _)
+    local p = {x=pos.x+math.random(-5,5), y=pos.y-math.random(0,3), z=pos.z+math.random(-5,5)}
+    if minetest.get_node(p).name == "air" then
+      minetest.add_node(p, {name="bees:bees"})
+    end
+  end,
+})
+
 minetest.register_abm({ --remove bees
   nodenames = {"bees:bees"},
-  interval = 60,
+  interval = 40,
   chance = 4,
   action = function(pos, node, _, _)
     minetest.remove_node(pos)
